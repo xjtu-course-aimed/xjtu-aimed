@@ -153,6 +153,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             position: relative;
+            cursor: pointer;
         }
         
         .gallery-item:hover {
@@ -167,7 +168,7 @@
             background: #f0f4f8;
         }
         
-        /* 图片样式 - 关键部分 */
+        /* 图片样式 */
         .project-image {
             width: 100%;
             height: 100%;
@@ -256,27 +257,118 @@
             opacity: 0.8;
         }
         
-        /* 图片上传提示 */
-        .image-upload-tip {
-            background: #e6f7ff;
+        /* 图片放大模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            margin: 5vh auto;
+            display: block;
+            animation: zoom 0.3s forwards;
+        }
+        
+        @keyframes zoom {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .modal-img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
             border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem auto;
-            max-width: 800px;
-            border-left: 4px solid #1890ff;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
         }
         
-        .image-upload-tip h3 {
-            color: #1890ff;
-            margin-bottom: 1rem;
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 1001;
         }
         
-        .image-upload-tip ul {
-            padding-left: 1.5rem;
+        .close-btn:hover {
+            color: #26d0ce;
         }
         
-        .image-upload-tip li {
-            margin-bottom: 0.5rem;
+        .image-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        .image-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .image-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 1001;
+        }
+        
+        .nav-btn {
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(38, 208, 206, 0.7);
         }
         
         @media (max-width: 768px) {
@@ -296,12 +388,76 @@
             .gallery {
                 grid-template-columns: 1fr;
             }
+            
+            .modal-content {
+                max-width: 95%;
+            }
+            
+            .close-btn {
+                font-size: 30px;
+                top: 10px;
+                right: 15px;
+            }
+            
+            .nav-btn {
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
         }
         
         .ai-icon {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
             color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .usage-guide {
+            background: #e6f7ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            border-left: 4px solid #1890ff;
+        }
+        
+        .usage-guide h3 {
+            color: #1890ff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .usage-guide ul {
+            padding-left: 1.5rem;
+        }
+        
+        .usage-guide li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .usage-guide li:before {
+            content: "•";
+            color: #1890ff;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        .feature-icon {
+            background: #1890ff;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -339,15 +495,23 @@
     </header>
     
     <div class="container">
-
+        <div class="usage-guide">
+            <h3><i class="fas fa-info-circle"></i> 使用指南：点击图片查看功能</h3>
+            <ul>
+                <li><strong>点击任意项目图片</strong> - 查看大图和详细描述</li>
+                <li><strong>大图模式下</strong> - 使用左右箭头切换项目，点击关闭按钮或图片外区域退出</li>
+                <li><strong>键盘操作</strong> - 左右方向键切换图片，ESC键退出</li>
+                <li><strong>触屏操作</strong> - 左右滑动切换图片，点击任意位置退出</li>
+            </ul>
+        </div>
         
         <div class="section-title">
             <h2>课程项目成果展示</h2>
         </div>
         
         <div class="gallery">
-            <!-- 项目1 - 使用真实图片 -->
-            <div class="gallery-item">
+            <!-- 项目1 -->
+            <div class="gallery-item" data-index="0">
                 <div class="image-container">
                     <img class="project-image" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="肺部CT扫描与AI分析界面">
                 </div>
@@ -362,8 +526,8 @@
                 </div>
             </div>
             
-            <!-- 项目2 - 使用真实图片 -->
-            <div class="gallery-item">
+            <!-- 项目2 -->
+            <div class="gallery-item" data-index="1">
                 <div class="image-container">
                     <img class="project-image" src="img/test.jpg" alt="心电图与AI分析界面">
                 </div>
@@ -378,8 +542,8 @@
                 </div>
             </div>
             
-            <!-- 项目3 - 使用真实图片 -->
-            <div class="gallery-item">
+            <!-- 项目3 -->
+            <div class="gallery-item" data-index="2">
                 <div class="image-container">
                     <img class="project-image" src="https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="基因数据分析界面">
                 </div>
@@ -394,8 +558,8 @@
                 </div>
             </div>
             
-            <!-- 项目4 - 使用真实图片 -->
-            <div class="gallery-item">
+            <!-- 项目4 -->
+            <div class="gallery-item" data-index="3">
                 <div class="image-container">
                     <img class="project-image" src="https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="视网膜病变分析界面">
                 </div>
@@ -410,8 +574,8 @@
                 </div>
             </div>
             
-            <!-- 项目5 - 使用真实图片 -->
-            <div class="gallery-item">
+            <!-- 项目5 -->
+            <div class="gallery-item" data-index="4">
                 <div class="image-container">
                     <img class="project-image" src="https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="患者风险预警系统界面">
                 </div>
@@ -426,8 +590,8 @@
                 </div>
             </div>
             
-            <!-- 项目6 - 使用真实图片 -->
-            <div class="gallery-item">
+            <!-- 项目6 -->
+            <div class="gallery-item" data-index="5">
                 <div class="image-container">
                     <img class="project-image" src="https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="医学文献分析平台界面">
                 </div>
@@ -440,6 +604,26 @@
                         <span>处理文献: 500万+</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 图片放大模态框 -->
+    <div class="modal" id="imageModal">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <div class="navigation">
+            <div class="nav-btn" id="prevBtn">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="nav-btn" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+        <div class="modal-content">
+            <img class="modal-img" id="expandedImg">
+            <div class="image-info">
+                <div class="image-title" id="modalTitle"></div>
+                <div class="image-desc" id="modalDesc"></div>
             </div>
         </div>
     </div>
@@ -471,21 +655,137 @@
     </footer>
     
     <script>
-        // 图片悬停效果增强
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                const img = this.querySelector('.project-image');
-                if (img) {
-                    img.style.transform = 'scale(1.05)';
-                }
-            });
+        // 图片数据
+        const projects = [
+            {
+                title: "基于深度学习的肺部CT影像分析",
+                description: "使用卷积神经网络(CNN)对肺部CT扫描进行自动分析，实现肺结节检测与分类，辅助早期肺癌诊断。",
+                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                alt: "肺部CT扫描与AI分析界面"
+            },
+            {
+                title: "心电图异常自动识别系统",
+                description: "开发的心电信号分析系统可实时监测并识别心律失常、心肌缺血等心脏异常状况，提供临床预警。",
+                image: "https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                alt: "心电图与AI分析界面"
+            },
+            {
+                title: "基因组数据驱动的癌症风险预测",
+                description: "整合基因组数据与临床信息，构建机器学习模型预测个体患癌风险，为精准预防提供依据。",
+                image: "https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                alt: "基因数据分析界面"
+            },
+            {
+                title: "糖尿病视网膜病变自动筛查",
+                description: "基于眼底图像的深度学习系统，自动分级糖尿病视网膜病变，实现大规模人群筛查。",
+                image: "https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                alt: "视网膜病变分析界面"
+            },
+            {
+                title: "智能住院患者风险预警系统",
+                description: "利用电子健康记录数据预测住院患者病情恶化风险，为临床干预提供早期预警。",
+                image: "https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                alt: "患者风险预警系统界面"
+            },
+            {
+                title: "医学文献智能分析平台",
+                description: "应用自然语言处理技术分析海量医学文献，自动提取疾病-治疗关系，辅助临床决策。",
+                image: "https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                alt: "医学文献分析平台界面"
+            }
+        ];
+        
+        // DOM元素
+        const modal = document.getElementById('imageModal');
+        const expandedImg = document.getElementById('expandedImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const closeModal = document.getElementById('closeModal');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        let currentIndex = 0;
+        
+        // 打开图片模态框
+        function openModal(index) {
+            currentIndex = index;
+            const project = projects[index];
             
-            item.addEventListener('mouseleave', function() {
-                const img = this.querySelector('.project-image');
-                if (img) {
-                    img.style.transform = 'scale(1)';
-                }
+            expandedImg.src = project.image;
+            expandedImg.alt = project.alt;
+            modalTitle.textContent = project.title;
+            modalDesc.textContent = project.description;
+            
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+        
+        // 关闭模态框
+        function closeImageModal() {
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto'; // 恢复滚动
+        }
+        
+        // 导航到上一张
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+            openModal(currentIndex);
+        }
+        
+        // 导航到下一张
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % projects.length;
+            openModal(currentIndex);
+        }
+        
+        // 事件监听器
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                openModal(index);
             });
+        });
+        
+        closeModal.addEventListener('click', closeImageModal);
+        prevBtn.addEventListener('click', prevImage);
+        nextBtn.addEventListener('click', nextImage);
+        
+        // 点击模态框背景关闭
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeImageModal();
+            }
+        });
+        
+        // 键盘导航
+        document.addEventListener('keydown', (e) => {
+            if (modal.classList.contains('show')) {
+                if (e.key === 'Escape') {
+                    closeImageModal();
+                } else if (e.key === 'ArrowLeft') {
+                    prevImage();
+                } else if (e.key === 'ArrowRight') {
+                    nextImage();
+                }
+            }
+        });
+        
+        // 触屏滑动支持
+        let touchStartX = 0;
+        
+        modal.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+        
+        modal.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diffX = touchStartX - touchEndX;
+            
+            if (diffX > 50) {
+                nextImage(); // 向左滑动
+            } else if (diffX < -50) {
+                prevImage(); // 向右滑动
+            }
         });
         
         // 动态更新年份
