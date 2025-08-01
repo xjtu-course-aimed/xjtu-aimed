@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医学人工智能 - 课程成果展示</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,100 M100,0 L0,100" stroke="white" stroke-width="1" fill="none"/></svg>');
+            background-size: cover;
+        }
+        
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .intro {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            min-width: 200px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #1a2980;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+        
+        .gallery-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .image-container {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            background: #f0f4f8;
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #1a2980;
+            background: linear-gradient(135deg, #e6f0ff 0%, #d1e3ff 100%);
+        }
+        
+        .item-content {
+            padding: 1.5rem;
+        }
+        
+        .item-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #1a2980;
+        }
+        
+        .item-description {
+            color: #555;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+        
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #777;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            background: #e6f7ff;
+            color: #1890ff;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        
+        footer {
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .ai-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <div class="ai-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <h1>医学人工智能</h1>
+            <div class="subtitle">医学影像诊断与临床决策支持系统</div>
+            <div class="intro">
+                本课程专注于医学领域中人工智能技术的应用，涵盖医学影像分析、疾病预测模型、临床决策支持系统等核心内容。学生通过实践项目掌握深度学习、计算机视觉和自然语言处理技术在医疗健康领域的应用。
+            </div>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">实践项目</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">学习周数</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">专业模块</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">36</div>
+                    <div class="stat-label">学生人数</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="section-title">
+            <h2>课程项目成果展示</h2>
+        </div>
+        
+        <div class="gallery">
+            <div class="gallery-item">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <i class="fas fa-lungs"></i>
+                    </div>
+                </div>
+                <div class="item-content">
+                    <h3 class="item-title">基于深度学习的肺部CT影像分析</h3>
+                    <p class="item-description">使用卷积神经网络(CNN)对肺部CT扫描进行自动分析，实现肺结节检测与分类，辅助早期肺癌诊断。</p>
+                    <div class="tech-badge">Python, TensorFlow, OpenCV</div>
+                    <div class="item-meta">
+                        <span>张明团队</span>
+                        <span>准确率: 96.2%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                </div>
+                <div class="item-content">
+                    <h3 class="item-title">心电图异常自动识别系统</h3>
+                    <p class="item-description">开发的心电信号分析系统可实时监测并识别心律失常、心肌缺血等心脏异常状况，提供临床预警。</p>
+                    <div class="tech-badge">PyTorch, Pandas, Scikit-learn</div>
+                    <div class="item-meta">
+                        <span>李华团队</span>
+                        <span>F1分数: 0.94</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                </div>
+                <div class="item-content">
+                    <h3 class="item-title">基因组数据驱动的癌症风险预测</h3>
+                    <p class="item-description">整合基因组数据与临床信息，构建机器学习模型预测个体患癌风险，为精准预防提供依据。</p>
+                    <div class="tech-badge">R, XGBoost, BioPython</div>
+                    <div class="item-meta">
+                        <span>王琳团队</span>
+                        <span>AUC: 0.92</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                </div>
+                <div class="item-content">
+                    <h3 class="item-title">糖尿病视网膜病变自动筛查</h3>
+                    <p class="item-description">基于眼底图像的深度学习系统，自动分级糖尿病视网膜病变，实现大规模人群筛查。</p>
+                    <div class="tech-badge">Keras, Flask, Docker</div>
+                    <div class="item-meta">
+                        <span>陈涛团队</span>
+                        <span>敏感度: 98.5%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <i class="fas fa-procedures"></i>
+                    </div>
+                </div>
+                <div class="item-content">
+                    <h3 class="item-title">智能住院患者风险预警系统</h3>
+                    <p class="item-description">利用电子健康记录数据预测住院患者病情恶化风险，为临床干预提供早期预警。</p>
+                    <div class="tech-badge">Python, LightGBM, FastAPI</div>
+                    <div class="item-meta">
+                        <span>赵雪团队</span>
+                        <span>提前预警: 6-12小时</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <i class="fas fa-file-medical-alt"></i>
+                    </div>
+                </div>
+                <div class="item-content">
+                    <h3 class="item-title">医学文献智能分析平台</h3>
+                    <p class="item-description">应用自然语言处理技术分析海量医学文献，自动提取疾病-治疗关系，辅助临床决策。</p>
+                    <div class="tech-badge">BERT, SpaCy, Elasticsearch</div>
+                    <div class="item-meta">
+                        <span>刘阳团队</span>
+                        <span>处理文献: 500万+</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">医学人工智能研究中心</div>
+            <p>致力于推动人工智能技术在医学领域的创新与应用</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>contact@med-ai.edu.cn</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+86 10 1234 5678</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>北京市海淀区学院路38号</span>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 医学人工智能研究中心 | 课程成果展示平台
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // 图片悬停效果增强
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                const icon = this.querySelector('.image-placeholder i');
+                icon.style.transform = 'scale(1.1)';
+                icon.style.transition = 'transform 0.3s ease';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                const icon = this.querySelector('.image-placeholder i');
+                icon.style.transform = 'scale(1)';
+            });
+        });
+        
+        // 动态更新年份
+        document.querySelector('.copyright').innerHTML = 
+            `&copy; ${new Date().getFullYear()} 医学人工智能研究中心 | 课程成果展示平台`;
+    </script>
+</body>
+</html>
