@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>医学人工智能 - 课程成果展示</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,250 +14,292 @@
         }
         
         body {
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
-            background-attachment: fixed;
+            color: #1a1a1a;
+            background: #ffffff;
             overflow-x: hidden;
         }
         
-        header {
-            background: linear-gradient(to right, #1a2980, #26d0ce);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .header-bg {
-            position: absolute;
+        /* 导航栏样式 */
+        nav {
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.15;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,100 M100,0 L0,100" stroke="white" stroke-width="1" fill="none"/></svg>');
-            background-size: cover;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 0.8rem 0;
         }
         
-        h1 {
-            font-family: 'Roboto', sans-serif;
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+        
+        /* 主标题区域 */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
             font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            letter-spacing: 1px;
+            color: #1e293b;
+            letter-spacing: -0.02em;
         }
         
-        .subtitle {
-            font-size: 1.8rem;
-            font-weight: 300;
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: #64748b;
             margin-bottom: 2rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            font-weight: 400;
         }
         
-        .intro {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .course-intro {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            max-width: 700px;
+            text-align: left;
         }
         
-        .stats-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+        .course-intro h2 {
+            color: #2563eb;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .course-intro p {
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin: 3rem auto;
+            max-width: 600px;
         }
         
-        .stat-box {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 1.5rem;
+        .stat-item {
             text-align: center;
-            min-width: 200px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
-        .stat-value {
+        .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
+            color: #2563eb;
             margin-bottom: 0.5rem;
+            display: block;
         }
         
         .stat-label {
-            font-size: 1rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
         
-        .container {
-            max-width: 1400px;
+        /* 主要内容区域 */
+        .main-content {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 4rem 2rem;
         }
         
-        .section-title {
+        .section-header {
             text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
+            margin-bottom: 4rem;
         }
         
-        .section-title h2 {
+        .section-header h2 {
             font-size: 2.5rem;
-            color: #1a2980;
-            display: inline-block;
-            padding-bottom: 15px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
         }
         
-        .section-title h2:after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(to right, #1a2980, #26d0ce);
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
+        .section-header p {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
-        .gallery {
+        /* 项目展示网格 */
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-            padding: 1rem;
+            margin-top: 3rem;
         }
         
-        .gallery-item {
+        .project-card {
             background: white;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
-            position: relative;
             cursor: pointer;
         }
         
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
-        .image-container {
-            height: 250px;
-            overflow: hidden;
-            position: relative;
-            background: #f0f4f8;
-        }
-        
-        /* 图片样式 */
         .project-image {
             width: 100%;
-            height: 100%;
+            height: 240px;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.3s ease;
         }
         
-        .gallery-item:hover .project-image {
+        .project-card:hover .project-image {
             transform: scale(1.05);
         }
         
-        .item-content {
+        .project-content {
             padding: 1.5rem;
         }
         
-        .item-title {
-            font-size: 1.4rem;
+        .project-title {
+            font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: #1a2980;
+            color: #1e293b;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
         }
         
-        .item-description {
-            color: #555;
-            margin-bottom: 1.2rem;
-            font-size: 1rem;
+        .project-description {
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
         
-        .item-meta {
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tag {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .project-meta {
             display: flex;
             justify-content: space-between;
-            color: #777;
-            font-size: 0.9rem;
-            border-top: 1px solid #eee;
+            align-items: center;
             padding-top: 1rem;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.85rem;
+            color: #94a3b8;
         }
         
-        .tech-badge {
-            display: inline-block;
-            background: #e6f7ff;
-            color: #1890ff;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-        }
-        
+        /* 页脚 */
         footer {
-            background: linear-gradient(to right, #1a2980, #26d0ce);
+            background: #1e293b;
             color: white;
-            text-align: center;
-            padding: 3rem 2rem;
-            margin-top: 3rem;
+            padding: 3rem 2rem 2rem;
+            margin-top: 5rem;
         }
         
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
+            text-align: center;
         }
         
-        .footer-logo {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
         }
         
-        .contact-info {
+        .footer-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
             flex-wrap: wrap;
         }
         
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
         }
         
         .copyright {
             margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
             font-size: 0.9rem;
-            opacity: 0.8;
         }
         
-        /* 图片放大模态框样式 */
+        /* 模态框样式 */
         .modal {
             display: none;
             position: fixed;
@@ -266,522 +308,599 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            overflow: auto;
-            padding: 20px;
-            box-sizing: border-box;
+            z-index: 2000;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
         
         .modal.show {
-            display: block;
+            display: flex;
             opacity: 1;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
         }
         
         .modal-content {
             position: relative;
-            max-width: 90%;
+            max-width: 90vw;
             max-height: 90vh;
-            margin: 5vh auto;
-            display: block;
-            animation: zoom 0.3s forwards;
+            animation: modalSlideIn 0.3s ease;
         }
         
-        @keyframes zoom {
-            from { transform: scale(0.8); opacity: 0; }
+        @keyframes modalSlideIn {
+            from { transform: scale(0.9); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
         
-        .modal-img {
+        .modal-image {
             width: 100%;
             height: auto;
-            max-height: 80vh;
+            max-height: 70vh;
             object-fit: contain;
-            display: block;
-            margin: 0 auto;
             border-radius: 8px;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
         }
         
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            z-index: 1001;
+        .modal-info {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0 0 8px 8px;
         }
         
-        .close-btn:hover {
-            color: #26d0ce;
-        }
-        
-        .image-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-        
-        .image-title {
+        .modal-title {
+            font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 5px;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
         }
         
-        .image-desc {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        .modal-description {
+            color: #64748b;
+            line-height: 1.6;
         }
         
-        .navigation {
+        .close-modal {
             position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            box-sizing: border-box;
-            z-index: 1001;
-        }
-        
-        .nav-btn {
+            top: -3rem;
+            right: 0;
+            background: none;
+            border: none;
             color: white;
-            font-size: 40px;
+            font-size: 2rem;
             cursor: pointer;
-            background: rgba(0, 0, 0, 0.3);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.3s;
+            transition: transform 0.3s ease;
         }
         
-        .nav-btn:hover {
-            background: rgba(38, 208, 206, 0.7);
+        .close-modal:hover {
+            transform: scale(1.1);
         }
         
+        /* 响应式设计 */
         @media (max-width: 768px) {
-            h1 {
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 6rem 1rem 3rem;
+            }
+            
+            .hero h1 {
                 font-size: 2.5rem;
             }
             
-            .subtitle {
-                font-size: 1.4rem;
+            .main-content {
+                padding: 3rem 1rem;
             }
             
-            .stats-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .gallery {
+            .projects-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             
             .modal-content {
-                max-width: 95%;
-            }
-            
-            .close-btn {
-                font-size: 30px;
-                top: 10px;
-                right: 15px;
-            }
-            
-            .nav-btn {
-                font-size: 30px;
-                width: 40px;
-                height: 40px;
+                max-width: 95vw;
             }
         }
         
-        .ai-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
+        /* 滚动动画 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
         
-        .usage-guide {
-            background: #e6f7ff;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem auto;
-            max-width: 800px;
-            border-left: 4px solid #1890ff;
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
-        .usage-guide h3 {
-            color: #1890ff;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .usage-guide ul {
-            padding-left: 1.5rem;
-        }
-        
-        .usage-guide li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 25px;
-        }
-        
-        .usage-guide li:before {
-            content: "•";
-            color: #1890ff;
-            font-size: 1.5rem;
-            position: absolute;
-            left: 0;
-            top: -5px;
-        }
-        
-        .feature-icon {
-            background: #1890ff;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-        }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-bg"></div>
-        <div class="header-content">
-            <div class="ai-icon">
-                <i class="fas fa-brain"></i>
-            </div>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">医学AI</a>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#projects">项目展示</a></li>
+                <li><a href="#about">关于课程</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主标题区域 -->
+    <section class="hero" id="home">
+        <div class="hero-container">
             <h1>医学人工智能</h1>
-            <div class="subtitle">医学影像诊断与临床决策支持系统</div>
-            <div class="intro">
-                本课程专注于医学领域中人工智能技术的应用，涵盖医学影像分析、疾病预测模型、临床决策支持系统等核心内容。学生通过实践项目掌握深度学习、计算机视觉和自然语言处理技术在医疗健康领域的应用。
+            <p class="subtitle">融合医学专业知识与前沿AI技术，培养医疗健康领域的创新人才</p>
+            
+            <div class="course-intro fade-in">
+                <h2><i class="fas fa-brain"></i> 课程简介</h2>
+                <p>
+                    本课程专注于人工智能技术在医学领域的深度应用，涵盖医学影像诊断、疾病预测建模、
+                    临床决策支持系统、药物发现等核心领域。学生将通过理论学习与实践项目相结合的方式，
+                    掌握深度学习、计算机视觉、自然语言处理等前沿技术在医疗健康场景中的应用。
+                </p>
+                <p>
+                    课程采用项目驱动的教学模式，每个学生团队将完成一个完整的医学AI项目，
+                    从问题定义、数据采集、模型设计到系统部署，全流程体验医学AI产品的开发过程。
+                </p>
             </div>
-            <div class="stats-container">
-                <div class="stat-box">
-                    <div class="stat-value">12</div>
-                    <div class="stat-label">实践项目</div>
+            
+            <div class="stats-grid fade-in">
+                <div class="stat-item">
+                    <span class="stat-number">24</span>
+                    <span class="stat-label">学习周数</span>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-value">24</div>
-                    <div class="stat-label">学习周数</div>
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">实践项目</span>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-value">8</div>
-                    <div class="stat-label">专业模块</div>
+                <div class="stat-item">
+                    <span class="stat-number">36</span>
+                    <span class="stat-label">学生人数</span>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-value">36</div>
-                    <div class="stat-label">学生人数</div>
+                <div class="stat-item">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">专业模块</span>
                 </div>
             </div>
         </div>
-    </header>
-    
-    <div class="container">
-        
-        <div class="section-title">
+    </section>
+
+    <!-- 项目展示区域 -->
+    <main class="main-content" id="projects">
+        <div class="section-header fade-in">
             <h2>课程项目成果展示</h2>
+            <p>学生团队运用所学知识，开发了多个具有实际应用价值的医学人工智能项目</p>
         </div>
         
-        <div class="gallery">
-            <!-- 项目1 -->
-            <div class="gallery-item" data-index="0">
-                <div class="image-container">
-                    <img class="project-image" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="肺部CT扫描与AI分析界面">
-                </div>
-                <div class="item-content">
-                    <h3 class="item-title">基于深度学习的肺部CT影像分析</h3>
-                    <p class="item-description">使用卷积神经网络(CNN)对肺部CT扫描进行自动分析，实现肺结节检测与分类，辅助早期肺癌诊断。</p>
-                    <div class="tech-badge">Python, TensorFlow, OpenCV</div>
-                    <div class="item-meta">
+        <div class="projects-grid">
+            <!-- 项目1: 肺部CT影像分析 -->
+            <div class="project-card fade-in" data-project="0">
+                <img class="project-image" 
+                     src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="肺部CT扫描AI分析系统">
+                <div class="project-content">
+                    <h3 class="project-title">智能肺部CT影像诊断系统</h3>
+                    <p class="project-description">
+                        基于深度卷积神经网络的肺部CT自动分析系统，实现肺结节检测、分类与恶性概率评估，
+                        辅助医生进行早期肺癌筛查诊断。
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">深度学习</span>
+                        <span class="tag">医学影像</span>
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">Python</span>
+                    </div>
+                    <div class="project-meta">
                         <span>张明团队</span>
-                        <span>准确率: 96.2%</span>
+                        <span>准确率: 96.8%</span>
                     </div>
                 </div>
             </div>
             
-            <!-- 项目2 -->
-            <div class="gallery-item" data-index="1">
-                <div class="image-container">
-                    <img class="project-image" src="img/test.jpg" alt="心电图与AI分析界面">
-                </div>
-                <div class="item-content">
-                    <h3 class="item-title">心电图异常自动识别系统</h3>
-                    <p class="item-description">开发的心电信号分析系统可实时监测并识别心律失常、心肌缺血等心脏异常状况，提供临床预警。</p>
-                    <div class="tech-badge">PyTorch, Pandas, Scikit-learn</div>
-                    <div class="item-meta">
+            <!-- 项目2: 心电图分析 -->
+            <div class="project-card fade-in" data-project="1">
+                <img class="project-image" 
+                     src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="心电图AI分析系统">
+                <div class="project-content">
+                    <h3 class="project-title">实时心电图异常监测平台</h3>
+                    <p class="project-description">
+                        开发实时心电信号分析算法，自动识别心律失常、心肌缺血等异常模式，
+                        为心血管疾病提供早期预警和风险评估。
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">信号处理</span>
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">实时监控</span>
+                        <span class="tag">移动端</span>
+                    </div>
+                    <div class="project-meta">
                         <span>李华团队</span>
                         <span>F1分数: 0.94</span>
                     </div>
                 </div>
             </div>
             
-            <!-- 项目3 -->
-            <div class="gallery-item" data-index="2">
-                <div class="image-container">
-                    <img class="project-image" src="https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="基因数据分析界面">
-                </div>
-                <div class="item-content">
-                    <h3 class="item-title">基因组数据驱动的癌症风险预测</h3>
-                    <p class="item-description">整合基因组数据与临床信息，构建机器学习模型预测个体患癌风险，为精准预防提供依据。</p>
-                    <div class="tech-badge">R, XGBoost, BioPython</div>
-                    <div class="item-meta">
+            <!-- 项目3: 基因组分析 -->
+            <div class="project-card fade-in" data-project="2">
+                <img class="project-image" 
+                     src="https://images.unsplash.com/photo-1628595351029-c2bf17511435?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="基因组数据分析平台">
+                <div class="project-content">
+                    <h3 class="project-title">个性化癌症风险预测模型</h3>
+                    <p class="project-description">
+                        整合基因组变异数据、家族史和生活方式信息，构建机器学习模型预测个体癌症发病风险，
+                        为精准医疗和个性化预防策略提供科学依据。
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">机器学习</span>
+                        <span class="tag">基因组学</span>
+                        <span class="tag">R语言</span>
+                        <span class="tag">XGBoost</span>
+                    </div>
+                    <div class="project-meta">
                         <span>王琳团队</span>
                         <span>AUC: 0.92</span>
                     </div>
                 </div>
             </div>
             
-            <!-- 项目4 -->
-            <div class="gallery-item" data-index="3">
-                <div class="image-container">
-                    <img class="project-image" src="https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="视网膜病变分析界面">
-                </div>
-                <div class="item-content">
-                    <h3 class="item-title">糖尿病视网膜病变自动筛查</h3>
-                    <p class="item-description">基于眼底图像的深度学习系统，自动分级糖尿病视网膜病变，实现大规模人群筛查。</p>
-                    <div class="tech-badge">Keras, Flask, Docker</div>
-                    <div class="item-meta">
+            <!-- 项目4: 眼底图像分析 -->
+            <div class="project-card fade-in" data-project="3">
+                <img class="project-image" 
+                     src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="眼底图像AI诊断系统">
+                <div class="project-content">
+                    <h3 class="project-title">糖尿病视网膜病变智能筛查</h3>
+                    <p class="project-description">
+                        基于眼底照片的深度学习分析系统，自动检测和分级糖尿病视网膜病变，
+                        实现大规模糖尿病患者眼部并发症的早期筛查。
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">计算机视觉</span>
+                        <span class="tag">Keras</span>
+                        <span class="tag">图像分割</span>
+                        <span class="tag">云部署</span>
+                    </div>
+                    <div class="project-meta">
                         <span>陈涛团队</span>
                         <span>敏感度: 98.5%</span>
                     </div>
                 </div>
             </div>
             
-            <!-- 项目5 -->
-            <div class="gallery-item" data-index="4">
-                <div class="image-container">
-                    <img class="project-image" src="https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="患者风险预警系统界面">
-                </div>
-                <div class="item-content">
-                    <h3 class="item-title">智能住院患者风险预警系统</h3>
-                    <p class="item-description">利用电子健康记录数据预测住院患者病情恶化风险，为临床干预提供早期预警。</p>
-                    <div class="tech-badge">Python, LightGBM, FastAPI</div>
-                    <div class="item-meta">
+            <!-- 项目5: 重症监护预警 -->
+            <div class="project-card fade-in" data-project="4">
+                <img class="project-image" 
+                     src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="重症监护预警系统">
+                <div class="project-content">
+                    <h3 class="project-title">重症患者病情恶化预警系统</h3>
+                    <p class="project-description">
+                        利用电子病历、生命体征监测数据和实验室检查结果，预测住院患者病情恶化风险，
+                        为医护人员提供提前6-12小时的早期预警。
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">时序预测</span>
+                        <span class="tag">LightGBM</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">Docker</span>
+                    </div>
+                    <div class="project-meta">
                         <span>赵雪团队</span>
-                        <span>提前预警: 6-12小时</span>
+                        <span>预警时间: 6-12h</span>
                     </div>
                 </div>
             </div>
             
-            <!-- 项目6 -->
-            <div class="gallery-item" data-index="5">
-                <div class="image-container">
-                    <img class="project-image" src="https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="医学文献分析平台界面">
-                </div>
-                <div class="item-content">
-                    <h3 class="item-title">医学文献智能分析平台</h3>
-                    <p class="item-description">应用自然语言处理技术分析海量医学文献，自动提取疾病-治疗关系，辅助临床决策。</p>
-                    <div class="tech-badge">BERT, SpaCy, Elasticsearch</div>
-                    <div class="item-meta">
+            <!-- 项目6: 医学文献挖掘 -->
+            <div class="project-card fade-in" data-project="5">
+                <img class="project-image" 
+                     src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="医学文献智能分析平台">
+                <div class="project-content">
+                    <h3 class="project-title">医学文献知识图谱构建</h3>
+                    <p class="project-description">
+                        应用自然语言处理技术分析海量医学文献，自动提取疾病-药物-基因关系，
+                        构建医学知识图谱，辅助临床决策和药物研发。
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">自然语言处理</span>
+                        <span class="tag">BERT</span>
+                        <span class="tag">知识图谱</span>
+                        <span class="tag">Neo4j</span>
+                    </div>
+                    <div class="project-meta">
                         <span>刘阳团队</span>
                         <span>处理文献: 500万+</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <!-- 图片放大模态框 -->
-    <div class="modal" id="imageModal">
-        <span class="close-btn" id="closeModal">&times;</span>
-        <div class="navigation">
-            <div class="nav-btn" id="prevBtn">
-                <i class="fas fa-chevron-left"></i>
-            </div>
-            <div class="nav-btn" id="nextBtn">
-                <i class="fas fa-chevron-right"></i>
-            </div>
-        </div>
-        <div class="modal-content">
-            <img class="modal-img" id="expandedImg">
-            <div class="image-info">
-                <div class="image-title" id="modalTitle"></div>
-                <div class="image-desc" id="modalDesc"></div>
-            </div>
-        </div>
-    </div>
-    
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">医学人工智能研究中心</div>
-            <p>致力于推动人工智能技术在医学领域的创新与应用</p>
             
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>contact@med-ai.edu.cn</span>
+            <!-- 项目7: 药物分子设计 -->
+            <div class="project-card fade-in" data-project="6">
+                <img class="project-image" 
+                     src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="AI药物分子设计平台">
+                <div class="project-content">
+                    <h3 class="project-title">AI驱动的药物分子设计</h3>
+                    <p class="project-description">
+                        基于深度生成模型和分子动力学模拟，设计具有特定药理活性的新分子，
+                        加速新药发现过程，降低药物研发成本。
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">分子建模</span>
+                        <span class="tag">生成模型</span>
+                        <span class="tag">RDKit</span>
+                        <span class="tag">化学信息学</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>马强团队</span>
+                        <span>成功率: 15.2%</span>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <span>+86 10 1234 5678</span>
+            </div>
+            
+            <!-- 项目8: 手术机器人辅助 -->
+            <div class="project-card fade-in" data-project="7">
+                <img class="project-image" 
+                     src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="手术机器人AI辅助系统">
+                <div class="project-content">
+                    <h3 class="project-title">智能手术导航与辅助系统</h3>
+                    <p class="project-description">
+                        结合医学影像和机器学习技术，为外科医生提供实时手术导航和智能辅助建议，
+                        提高手术精度和安全性。
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">机器视觉</span>
+                        <span class="tag">实时处理</span>
+                        <span class="tag">OpenCV</span>
+                        <span class="tag">C++</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>孙丽团队</span>
+                        <span>延迟: < 50ms</span>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>北京市海淀区学院路38号</span>
-                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 模态框 -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <h3 class="modal-title" id="modalTitle"></h3>
+                <p class="modal-description" id="modalDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer id="contact">
+        <div class="footer-content">
+            <h3 class="footer-title">医学人工智能研究中心</h3>
+            <p>推动AI技术在医学领域的创新应用，培养医疗健康产业的未来人才</p>
+            
+            <div class="footer-links">
+                <a href="mailto:med-ai@university.edu.cn">
+                    <i class="fas fa-envelope"></i> med-ai@university.edu.cn
+                </a>
+                <a href="tel:+8610-12345678">
+                    <i class="fas fa-phone"></i> +86 10-1234-5678
+                </a>
+                <a href="#">
+                    <i class="fas fa-map-marker-alt"></i> 北京市海淀区学院路38号
+                </a>
             </div>
             
             <div class="copyright">
-                &copy; 2023 医学人工智能研究中心 | 课程成果展示平台
+                <p>&copy; 2025 医学人工智能研究中心 | 课程成果展示平台 | 致力于医学AI教育创新</p>
             </div>
         </div>
     </footer>
     
     <script>
-        // 图片数据
+        // 项目数据
         const projects = [
             {
-                title: "基于深度学习的肺部CT影像分析",
-                description: "使用卷积神经网络(CNN)对肺部CT扫描进行自动分析，实现肺结节检测与分类，辅助早期肺癌诊断。",
-                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-                alt: "肺部CT扫描与AI分析界面"
+                title: "智能肺部CT影像诊断系统",
+                description: "基于深度卷积神经网络的肺部CT自动分析系统，实现肺结节检测、分类与恶性概率评估，辅助医生进行早期肺癌筛查诊断。系统采用先进的3D CNN架构，能够准确识别直径小于5mm的微小结节，为临床提供可靠的诊断参考。",
+                image: "img/test.jpg"
             },
             {
-                title: "心电图异常自动识别系统",
-                description: "开发的心电信号分析系统可实时监测并识别心律失常、心肌缺血等心脏异常状况，提供临床预警。",
-                image: "img/test.jpg",
-                alt: "心电图与AI分析界面"
+                title: "实时心电图异常监测平台",
+                description: "开发实时心电信号分析算法，自动识别心律失常、心肌缺血等异常模式，为心血管疾病提供早期预警和风险评估。系统支持多导联同步分析，能够检测包括房颤、室性心律失常等多种心电异常模式。",
+                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
             },
             {
-                title: "基因组数据驱动的癌症风险预测",
-                description: "整合基因组数据与临床信息，构建机器学习模型预测个体患癌风险，为精准预防提供依据。",
-                image: "https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-                alt: "基因数据分析界面"
+                title: "个性化癌症风险预测模型",
+                description: "整合基因组变异数据、家族史和生活方式信息，构建机器学习模型预测个体癌症发病风险，为精准医疗和个性化预防策略提供科学依据。模型涵盖乳腺癌、结直肠癌、肺癌等多种常见癌症类型。",
+                image: "https://images.unsplash.com/photo-1628595351029-c2bf17511435?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
             },
             {
-                title: "糖尿病视网膜病变自动筛查",
-                description: "基于眼底图像的深度学习系统，自动分级糖尿病视网膜病变，实现大规模人群筛查。",
-                image: "https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-                alt: "视网膜病变分析界面"
+                title: "糖尿病视网膜病变智能筛查",
+                description: "基于眼底照片的深度学习分析系统，自动检测和分级糖尿病视网膜病变，实现大规模糖尿病患者眼部并发症的早期筛查。系统能够识别微血管瘤、硬性渗出、软性渗出等多种病理特征。",
+                image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
             },
             {
-                title: "智能住院患者风险预警系统",
-                description: "利用电子健康记录数据预测住院患者病情恶化风险，为临床干预提供早期预警。",
-                image: "https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-                alt: "患者风险预警系统界面"
+                title: "重症患者病情恶化预警系统",
+                description: "利用电子病历、生命体征监测数据和实验室检查结果，预测住院患者病情恶化风险，为医护人员提供提前6-12小时的早期预警。系统集成了机器学习和临床专家知识，显著提升了重症监护的效率和安全性。",
+                image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
             },
             {
-                title: "医学文献智能分析平台",
-                description: "应用自然语言处理技术分析海量医学文献，自动提取疾病-治疗关系，辅助临床决策。",
-                image: "https://images.unsplash.com/photo-1581595219316-5e6dce1a9c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-                alt: "医学文献分析平台界面"
+                title: "医学文献知识图谱构建",
+                description: "应用自然语言处理技术分析海量医学文献，自动提取疾病-药物-基因关系，构建医学知识图谱，辅助临床决策和药物研发。系统已处理超过500万篇医学文献，构建了包含数百万实体关系的知识网络。",
+                image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                title: "AI驱动的药物分子设计",
+                description: "基于深度生成模型和分子动力学模拟，设计具有特定药理活性的新分子，加速新药发现过程，降低药物研发成本。系统结合了化学知识和机器学习算法，能够生成具有良好ADMET性质的候选化合物。",
+                image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                title: "智能手术导航与辅助系统",
+                description: "结合医学影像和机器学习技术，为外科医生提供实时手术导航和智能辅助建议，提高手术精度和安全性。系统支持多种手术类型，能够实时跟踪手术器械位置，提供精确的解剖结构识别和导航。",
+                image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
             }
         ];
-        
+
         // DOM元素
-        const modal = document.getElementById('imageModal');
-        const expandedImg = document.getElementById('expandedImg');
+        const modal = document.getElementById('projectModal');
+        const modalImage = document.getElementById('modalImage');
         const modalTitle = document.getElementById('modalTitle');
-        const modalDesc = document.getElementById('modalDesc');
-        const closeModal = document.getElementById('closeModal');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        
-        let currentIndex = 0;
-        
-        // 打开图片模态框
+        const modalDescription = document.getElementById('modalDescription');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        // 初始化事件监听器
+        function initializeEventListeners() {
+            // 项目卡片点击事件
+            projectCards.forEach((card, index) => {
+                card.addEventListener('click', () => openModal(index));
+            });
+
+            // 模态框关闭事件
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            // 键盘事件
+            document.addEventListener('keydown', (e) => {
+                if (modal.classList.contains('show') && e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+
+            // 滚动动画
+            initializeScrollAnimations();
+        }
+
+        // 打开模态框
         function openModal(index) {
-            currentIndex = index;
             const project = projects[index];
-            
-            expandedImg.src = project.image;
-            expandedImg.alt = project.alt;
+            modalImage.src = project.image;
+            modalImage.alt = project.title;
             modalTitle.textContent = project.title;
-            modalDesc.textContent = project.description;
+            modalDescription.textContent = project.description;
             
             modal.classList.add('show');
-            document.body.style.overflow = 'hidden'; // 防止背景滚动
+            document.body.style.overflow = 'hidden';
         }
-        
+
         // 关闭模态框
-        function closeImageModal() {
+        function closeModal() {
             modal.classList.remove('show');
-            document.body.style.overflow = 'auto'; // 恢复滚动
+            document.body.style.overflow = 'auto';
         }
-        
-        // 导航到上一张
-        function prevImage() {
-            currentIndex = (currentIndex - 1 + projects.length) % projects.length;
-            openModal(currentIndex);
+
+        // 滚动动画
+        function initializeScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // 观察所有带有fade-in类的元素
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
         }
-        
-        // 导航到下一张
-        function nextImage() {
-            currentIndex = (currentIndex + 1) % projects.length;
-            openModal(currentIndex);
+
+        // 平滑滚动
+        function smoothScroll(target) {
+            document.querySelector(target).scrollIntoView({
+                behavior: 'smooth'
+            });
         }
-        
-        // 事件监听器
-        galleryItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                openModal(index);
+
+        // 添加导航链接点击事件
+        document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = link.getAttribute('href');
+                smoothScroll(target);
             });
         });
-        
-        closeModal.addEventListener('click', closeImageModal);
-        prevBtn.addEventListener('click', prevImage);
-        nextBtn.addEventListener('click', nextImage);
-        
-        // 点击模态框背景关闭
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeImageModal();
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', initializeEventListeners);
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = 'none';
             }
         });
-        
-        // 键盘导航
-        document.addEventListener('keydown', (e) => {
-            if (modal.classList.contains('show')) {
-                if (e.key === 'Escape') {
-                    closeImageModal();
-                } else if (e.key === 'ArrowLeft') {
-                    prevImage();
-                } else if (e.key === 'ArrowRight') {
-                    nextImage();
-                }
-            }
-        });
-        
-        // 触屏滑动支持
-        let touchStartX = 0;
-        
-        modal.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
-        });
-        
-        modal.addEventListener('touchend', (e) => {
-            const touchEndX = e.changedTouches[0].clientX;
-            const diffX = touchStartX - touchEndX;
-            
-            if (diffX > 50) {
-                nextImage(); // 向左滑动
-            } else if (diffX < -50) {
-                prevImage(); // 向右滑动
-            }
-        });
-        
-        // 动态更新年份
-        document.querySelector('.copyright').innerHTML = 
-            `&copy; ${new Date().getFullYear()} 医学人工智能研究中心 | 课程成果展示平台`;
+
+        // 动态更新统计数据
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const animationDuration = 2000;
+
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                const increment = target / (animationDuration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+
+                // 当元素进入视窗时开始动画
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                observer.observe(counter);
+            });
+        }
+
+        // 初始化计数器动画
+        animateCounters();
     </script>
 </body>
 </html>
